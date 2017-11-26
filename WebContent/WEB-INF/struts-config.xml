@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts 
+Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="danhSachProductForm" type="form.DanhSachProductForm" />
+		<form-bean name="feedBackForm" type="form.FeedBackForm" />
+		<form-bean name="timKiemProductForm" type="form.TimKiemProductForm" />
+		<form-bean name="personForm" type="form.PersonForm" />
+		<form-bean name="productForm" type="form.ProductForm" />
+<!-- 		update pass -->
+		<form-bean name="updatePasswordPersonForm" type="form.UpdatePasswordPersonForm" />
+<!-- 		//khuyen -->
+		<form-bean name="categoryForm" type="form.CategoryForm" />
+		<form-bean name="productDetailForm" type="form.ProductDetailForm" />
+<!-- phuoc si da -->
+		<form-bean name="orderForm" type="form.OrderForm" />
+		<form-bean name="promotionForm" type="form.PromotionForm" />
+		<form-bean name="accessoriesForm" type="form.AccessoriesForm" />
+<!-- end phuoc si da -->
+<!-- cart form -->
+		<form-bean name="cartForm" type="form.CartForm" />
+<!-- binh luan dung -->
+		<form-bean name="commentProductForm" type="form.CommentProductForm"/>
+<!-- 	Yeu thich dung -->
+		<form-bean name="favoritesForm" type="form.FavoritesForm"></form-bean>
+<!-- nguoi dung dang nhap -->
+		<form-bean name="reportForm" type="form.ReportForm"></form-bean>
+	</form-beans>
+	<action-mappings>
+<!-- trang chu -->
+		<action input="/trangChu.jsp" name="danhSachProductForm"
+			path="/trang-chu" scope="request" type="action.DanhSachProductAction">
+			<forward name="danhSachProduct" path="/trangChu.jsp"/>
+		</action>
+<!-- chi tiet san pham -->
+		<action input="/chiTietSanPham.jsp" name="danhSachProductForm"
+		path="/chi-tiet-san-pham" scope="request" type="action.ChiTietProductAction">
+		<forward name="chiTietSanPham" path="/chiTietSanPham.jsp"/>
+		</action>
+		
+		<action input="/lienHe.jsp" name="feedBackForm" 
+		path="/lien-he" scope="request" type="action.FeedBackAction">
+			<forward name="feedBackSuccess" path="/trang-chu.do" redirect="true"></forward>
+			<forward name="feedBackFail" path="/lienHe.jsp"></forward>
+		</action>
+		<action input="/timKiem.jsp" name="danhSachProductForm"
+		 path="/tim-kiem-san-pham" scope="request" type="action.TimKiemProductAction">
+		 <forward name="timKiem200" path="/timKiem.jsp"></forward>
+		 <forward name="timKiem404" path="/trang-chu.do" redirect="true"></forward>
+		</action>
+<!-- cart -->
+		<action input="/gioHang.jsp" name="cartForm" path="/gio-hang"
+			scope="session" type="action.cart.DanhSachAction">
+			<forward name="thanhCong" path="/gioHang.jsp"></forward>
+		</action>
+		<action input="/gioHang.jsp" name="cartForm" path="/cap-nhat-gio-hang"
+			scope="session" type="action.cart.CapNhatAction">
+			<forward name="thanhCong" path="/gio-hang.do"></forward>
+		</action>
+
+<!-- quanly -->
+<!-- 		report -->
+		<action input="/quanly/report/danhSach.jsp" name="reportForm"
+			path="/quanly/report/danhsach" scope="request" type="action.quanly.report.ListReportAction">
+			<forward name="thanhCong" path="/quanly/report/danhSach.jsp"/>
+		</action>
+		<action input="/quanly/report/ajaxDanhSach.jsp" name="reportForm"
+			path="/quanly/report/ajaxDanhSach" scope="request" type="action.quanly.report.ListReportAction">
+			<forward name="thanhCong" path="/quanly/report/ajaxDanhSach.jsp"/>
+		</action>
+<!-- 		/report -->
+		<action input="/quanly/dangNhap.jsp" name="personForm" path="/quanly"
+			scope="request" type="action.person.AdminDangNhapAction">
+			<forward name="thatBai" path="/quanly/dangNhap.jsp" />
+			<forward name="thanhCong" path="/quanly/person/danhsach.do" />
+		</action>
+
+		<action input="/quanly/person/danhSach.jsp" name="personForm"
+			path="/quanly/person/danhsach" scope="request" type="action.person.DanhSachAction">
+			<forward name="thanhCong" path="/quanly/person/danhSach.jsp" />
+		</action>
+		<action input="/quanly/person/capNhat.jsp" name="personForm"
+			path="/quanly/person/capnhat" scope="request" type="action.person.CapNhatAction">
+			<forward name="thatBai" path="/quanly/person/capNhat.jsp" />
+			<forward name="thanhCong" path="/quanly/person/danhsach.do"	redirect="true" />
+		</action>
+
+		<!-- khuyen quan ly -->
+		<action input="/quanly/product/danhSach.jsp" name="productForm"
+			path="/quanly/product/danhsach" scope="request" type="action.product.DanhSachAction">
+			<forward name="thanhCong" path="/quanly/product/danhSach.jsp" />
+		</action>
+		<action input="/quanly/product/capNhat.jsp" name="productForm"
+			path="/quanly/product/capnhat" scope="request" type="action.product.CapNhatAction">
+			<forward name="thatBai" path="/quanly/product/capNhat.jsp" />
+			<forward name="thanhCong" path="/quanly/product/danhsach.do"
+				redirect="true" />
+		</action>
+		
+		
+		<action input="/quanly/category/danhSach.jsp" name="categoryForm"
+			path="/quanly/category/danhsach" scope="request" type="action.category.DanhSachAction">
+			<forward name="thanhCong" path="/quanly/category/danhSach.jsp" />
+		</action>
+		<action input="/quanly/category/capNhat.jsp" name="categoryForm"
+			path="/quanly/category/capnhat" scope="request" type="action.category.CapNhatAction">
+			<forward name="thatBai" path="/quanly/category/capNhat.jsp" />
+			<forward name="thanhCong" path="/quanly/category/danhsach.do"
+				redirect="true" />
+		</action>
+
+<!-- phuoc si da -->
+				<!-- ProductDetail -->
+		<action input="/quanly/productdetail/danhSach.jsp" name="productDetailForm"
+			path="/quanly/productdetail/danhsach" scope="request" type="action.productdetail.DanhSachAction">
+			<forward name="thanhCong" path="/quanly/productdetail/danhSach.jsp" />
+		</action>
+		
+		<action input="/quanly/productdetail/them.jsp" name="productDetailForm"
+			path="/quanly/productdetail/them" scope="request" type="action.productdetail.ThemAction">
+			<forward name="thatBai" path="/quanly/productdetail/them.jsp" />
+			<forward name="thanhCong" path="/quanly/productdetail/danhsach.do"
+				redirect="true" />
+		</action>
+		
+		<action input="/quanly/productdetail/capNhat.jsp" name="productDetailForm"
+			path="/quanly/productdetail/capnhat" scope="request" type="action.productdetail.CapNhatAction">
+			<forward name="thatBai" path="/quanly/productdetail/capNhat.jsp" />
+			<forward name="thanhCong" path="/quanly/productdetail/danhsach.do"
+				redirect="true" />
+		</action>
+		
+		<action input="/quanly/productdetail/xoa.jsp" name="productDetailForm"
+			path="/quanly/productdetail/xoa" scope="request" type="action.productdetail.XoaAction">
+			<forward name="thatBai" path="/quanly/productdetail/xoa.jsp" />
+			<forward name="thanhCong" path="/quanly/productdetail/danhsach.do"
+				redirect="true" />
+		</action>
+		
+		<!-- Order -->
+		<action input="/quanly/order/danhSach.jsp" name="orderForm"
+			path="/quanly/order/danhsach" scope="request" type="action.order.DanhSachAction">
+			<forward name="thanhCong" path="/quanly/order/danhSach.jsp" />
+		</action>
+			<action input="/quanly/order/capNhat.jsp" name="orderForm"
+			path="/quanly/order/capnhat" scope="request" type="action.order.CapNhatAction">
+			<forward name="thatBai" path="/quanly/order/capNhat.jsp" />
+			<forward name="thanhCong" path="/quanly/order/danhsach.do"
+				redirect="true" />
+		</action>
+		
+		<!-- feeback -->
+		<action input="/quanly/feedBack/danhSach.jsp" name="feedBackForm" 
+		path="/quanly/feedback/danhsach" scope="request" type="action.feedback.DanhSachAction">
+			<forward name="feedBackSuccess" path="/quanly/feedBack/danhSach.jsp"></forward>
+		</action>
+		
+		<!-- promotion -->
+		<action input="/quanly/promotion/danhSach.jsp" name="promotionForm" 
+		path="/quanly/promotion/danhsach" scope="request" type="action.promotion.DanhSachAction">
+			<forward name="promotionSuccess" path="/quanly/promotion/danhSach.jsp"></forward>
+		</action>
+		<!-- Accessories -->
+		<action input="/quanly/accessories/danhSach.jsp" name="accessoriesForm" 
+		path="/quanly/accessories/danhsach" scope="request" type="action.accessories.DanhSachAction">
+			<forward name="accessoriesSuccess" path="/quanly/accessories/danhSach.jsp"></forward>
+		</action>
+<!-- ket thuc phuoc si da -->
+
+<!-- comment product -->
+		<action input="/chiTietSanPham.jsp" name="commentProductForm"
+		path="/binh-luan-san-pham" scope="request" type="action.AddCommentProductAction">
+		</action>
+		<action input="/chiTietSanPham.jsp" name="commentProductForm"
+		path="/sua-binh-luan-san-pham" scope="request" type="action.UpdateCommentProductAction">
+		</action>
+		<action input="/chiTietSanPham.jsp" name="commentProductForm"
+		path="/xoa-binh-luan-san-pham" scope="request" type="action.DeleteCommentProductAction" >
+		</action>
+<!-- nguoi dung dang nhap -->
+		<action input="/dangNhapDangKy.jsp" name="personForm"
+		path="/dang-nhap-dang-ky" scope="request" type="action.CustomerLoginAddAction">
+			<forward name="dangNhapThanhCong" path="/trang-chu.do" redirect="true"/>
+			<forward name="dangKyThanhCong" path="/trang-chu.do" redirect="true"/>
+			<forward name="dangNhapThatBai" path="/dangNhapDangKy.jsp"/>
+			<forward name="loi" path="/dangNhapDangKy.jsp"/>
+		</action>
+<!-- nguoi dung dang xuat -->
+		<action input="DangXuatAction"
+		 path="/dang-xuat" type="action.DangXuatAction" scope="request">
+			<forward name="dangXuat" path="/trang-chu.do" redirect="true"></forward>
+		</action>
+<!-- dat hang -->
+		<action input="/datHang.jsp"
+		 path="/dat-hang" type="action.cart.DatHangAction" scope="request" name="personForm">
+		 	<forward name="thanhCong" path="/thanhToanThanhCong.jsp" redirect="true" />
+			<forward name="thatBai" path="/datHang.jsp" />
+		</action>
+<!-- 	dungnv 13 favorite -->
+		<action input="/chiTietSanPham.jsp" name="favoritesForm"
+		path="/yeu-thich-san-pham" scope="request" type="action.AddFavoritesAction" />
+		<action input="/timKiem.jsp" name="favoritesForm"
+		path="/xoa-danh-sach-yeu-thich" scope="request" type="action.DeleteFavoritesAction" />
+<!-- 	dungnv 13 thong tin tai khoan -->
+		<action input="/trangChu.jsp" name="personForm"
+		path="/thong-tin-tai-khoan" scope="request" type="action.ThongTinTaiKhoanAction" >
+			<forward name="thanhCong" path="/thongTinTaiKhoan.jsp" />
+		</action>
+<!-- 		doi mat khau -->
+		<action input="/doiMatKhau.jsp" name="updatePasswordPersonForm"
+		path="/doiMatKhau" scope="request" type="action.UpdatePasswordPersonAction" >
+			<forward name="thanhCong" path="/thong-tin-tai-khoan.do" redirect="true"/>
+			<forward name="thatBai" path="/doiMatKhau.jsp"/>
+		</action>
+<!-- ajax san pham o trang chu -->
+		<action input="/ajaxProduct.jsp" name="danhSachProductForm"
+			path="/ajaxProduct" scope="request" type="action.AjaxProductAction">
+			<forward name="thanhCong" path="/ajaxProduct.jsp"/>
+		</action>
+	</action-mappings>
+	<message-resources parameter="action.ApplicationResources" />
+	
+</struts-config>
